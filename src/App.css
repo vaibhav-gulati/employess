@@ -36,3 +36,182 @@
     transform: rotate(360deg);
   }
 }
+
+.employee-form input[type="text"] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #1DA1F2;
+  border-radius: 4px;
+  background-color: white;
+  outline: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-image: url('./man.svg');
+  background-size: 16px; 
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+.employee-form input[type="date"] {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #1DA1F2;
+  border-radius: 4px;
+  background-color: white;
+  outline: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-image: url('./man.svg');
+  background-size: 16px; 
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-right: 30px; 
+}
+
+.employee-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #1DA1F2;
+  border-radius: 4px;
+  background-color: white;
+  outline: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  appearance: none; 
+  background-image: url('./man.svg');
+  background-size: 16px; 
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-right: 30px; 
+}
+
+
+.employee-form button[type="submit"] {
+  background-color: #1DA1F2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
+.employee-form button[type="submit"]:hover {
+  background-color: #007acc;
+}
+.date-fields {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.date-fields input[type="date"] {
+  flex: 1; 
+  margin-right: 10px; 
+}
+
+.employee-form svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.no-employees{
+  margin-top: 10%;
+}
+
+.add-employee-container {
+  position: fixed;
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 1; 
+}
+
+.add-employee-button {
+  background-color: #1DA1F2;
+  color: white; 
+  border: none;
+  border-radius: 50%; 
+  width: 40px; 
+  height: 40px; 
+  font-size: 24px; 
+  cursor: pointer; /
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; 
+}
+
+
+.add-employee-button:hover {
+  background-color: #0f8fe9; 
+}
+.employee-tile {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.employee-tile span {
+  display: block; 
+  font-weight: bold; 
+  text-align: left; 
+  margin-bottom: 8px; 
+}
+
+.employee-tile + .employee-tile {
+  border-top: 1px solid #ccc;
+}
+
+.employee-name{
+  color: var(--colors-color-8, #323238);
+
+
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; 
+}
+
+.employee-start-date{
+  color: var(--colors-color-7, #949C9E);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; 
+}
+.employee-position{
+  color: var(--colors-color-7, #949C9E);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; 
+}
+.employee-tile {
+  position: relative;
+}
+
+.edit-delete-buttons {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  display: flex;
+}
+
+.edit-button,
+.delete-button {
+  margin-right: 5px; 
+  padding: 5px 10px;
+  background-color: #007BFF; 
+  color: #ffffff; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: #FF0000;
+}

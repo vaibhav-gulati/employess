@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
 import InitialPage from './components/InitialPage';
 import EmployeeForm from './components/EmployeeForm';
-import EditEmployee from './components/EditEmployee'; // Import the new component
+import EditEmployee from './components/EditEmployee';
 
 function App() {
   return (

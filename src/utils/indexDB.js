@@ -1,4 +1,3 @@
-// indexDB.js
 
 import { openDB } from 'idb';
 
@@ -7,15 +6,18 @@ const DB_VERSION = 1;
 const STORE_NAME = 'employees';
 
 export async function initializeDB() {
-  const db = await openDB(DB_NAME, DB_VERSION, {
-    upgrade(database) {
-      const store = database.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
-      store.createIndex('name', 'name', { unique: false });
-      store.createIndex('position', 'position', { unique: false });
-    },
-  });
-  return db;
-}
+    const db = await openDB(DB_NAME, DB_VERSION, {
+      upgrade(database) {
+        const store = database.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+        store.createIndex('name', 'name', { unique: false });
+        store.createIndex('position', 'position', { unique: false });
+        store.createIndex('startDate', 'startDate', { unique: false });
+        store.createIndex('endDate', 'endDate', { unique: false });
+      },
+    });
+    return db;
+  }
+  
 
 let dbInstance;
 
@@ -75,4 +77,3 @@ export async function updateEmployee(updatedEmployee) {
   await store.put(updatedEmployee);
 }
 
-// Other functions for IndexedDB operations can be added here
