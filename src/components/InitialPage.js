@@ -1,36 +1,56 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { addEmployee } from '../utils/indexDB';
 import { getAllEmployees, deleteEmployee } from '../utils/indexDB';
 import '../App.css';
 
 function InitialPage() {
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
+  const [isEmployeeDeleted, setIsEmployeeDeleted] = useState(false);
+  const [deletedEmployeeData, setDeletedEmployeeData] = useState(null);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     async function loadEmployees() {
       const employeesList = await getAllEmployees();
       setEmployees(employeesList);
-      console.log(employees);
+
     }
 
     loadEmployees();
-  }, []);
+  }, [isEmployeeDeleted]);
 
   const navigateToAddEmployee = () => {
     navigate('/add');
   };
 
-  const handleDeleteEmployee = async (employeeId) => {
-    await deleteEmployee(employeeId);
-    const updatedEmployeesList = await getAllEmployees();
-    setEmployees(updatedEmployeesList);
-  };
+
 
   const navigateToEditEmployee = (employeeId) => {
     navigate(`/edit/${employeeId}`);
   };
+
+  const handleDeleteEmployee = async (employeeId) => {
+    const deletedData = employees.find((employee) => employee.id === employeeId);
+    await deleteEmployee(employeeId);
+    const updatedEmployeesList = await getAllEmployees();
+    setEmployees(updatedEmployeesList);
+    setDeletedEmployeeData(deletedData);
+    setIsEmployeeDeleted(true);
+    setMessage('Employee deleted.');
+  };
+  
+  const handleUndo = async () => {
+    if (deletedEmployeeData) {
+      await addEmployee(deletedEmployeeData);
+      setDeletedEmployeeData(null);
+      setEmployees((prevEmployees) => [...prevEmployees, deletedEmployeeData]);
+      setIsEmployeeDeleted(false);
+    }
+  };
+  
 
   const currentDate = new Date();
   const currentEmployees = employees.filter((employee) => new Date(employee.endDate) >= currentDate);
@@ -52,9 +72,9 @@ function InitialPage() {
 <div className="employee-list">
   {currentEmployees.map((employee) => (
     <div key={employee.id} className="employee-tile">
-      <span className="employee-name">Name: {employee.name}</span>
-      <span className="employee-position">Position: {employee.position}</span>
-      <span className="employee-start-date">Start Date: {employee.startDate}</span>
+      <span className="employee-name"> {employee.name}</span>
+      <span className="employee-position"> {employee.position}</span>
+      <span className="employee-start-date"> {employee.startDate} </span>
       <div className="edit-delete-buttons">
                   <button className="edit-button" onClick={() => navigateToEditEmployee(employee.id)}>
                     Edit
@@ -76,9 +96,9 @@ function InitialPage() {
 <div className="employee-list">
   {previousEmployees.map((employee) => (
     <div key={employee.id} className="employee-tile">
-      <span className="employee-name">Name: {employee.name}</span>
-      <span className="employee-position">Position: {employee.position}</span>
-      <span className="employee-start-date">Start Date: {employee.startDate}</span>
+      <span className="employee-name">{employee.name}</span>
+      <span className="employee-position"> {employee.position}</span>
+      <span className="employee-start-date">{employee.startDate} - {employee.endDate}</span>
       <div className="edit-delete-buttons">
                   <button className="edit-button" onClick={() => navigateToEditEmployee(employee.id)}>
                     Edit
@@ -231,6 +251,16 @@ function InitialPage() {
 <div className="add-employee-container">
   <button className='add-employee-button' onClick={navigateToAddEmployee}>+</button>
 </div>
+
+{isEmployeeDeleted && (
+          <div className="message-box">
+          <p>{message}</p>
+          <button className="undo-button" onClick={handleUndo}>
+            Undo
+          </button>
+        </div>
+        )
+}
 
     </div>
   );

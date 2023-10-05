@@ -26,33 +26,76 @@ function EmployeeForm() {
     setEndDate('');
   };
 
+  function handleCancel(){
+    navigate('/');
+  }
+
   return (
-    <div className="employee-form">
+    <div className="">
        <header style={{ backgroundColor: '#1DA1F2', padding: '10px', textAlign: 'left', color:'white' }}>
         <h1> Add Employee Details</h1>
       </header>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input className='namelabel' type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="product_developer">Product Developer</option>
-            <option value="flutter_developer">Flutter Developer</option>
-            <option value="qa_tester">QA Tester</option>
-            <option value="product_owner">Product Owner</option>
-          </select>
-        </div>
-        <div className="date-fields">
-          <div>
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
-          </div>
-          <div>
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
-          </div>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div className='form-container'>
+      <form onSubmit={handleSubmit} className="employee-form">
+  <div className="form-group">
+    <input
+    placeholder='Employee Name'
+      id="name"
+      type="text"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      required
+    />
+  </div>
+
+  <div className="form-group">
+    <select
+    placeholder='Select Role'
+      id="role"
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+    >
+      <option value="product_developer">Product Developer</option>
+      <option value="flutter_developer">Flutter Developer</option>
+      <option value="qa_tester">QA Tester</option>
+      <option value="product_owner">Product Owner</option>
+    </select>
+  </div>
+
+  <div className="date-fields">
+    <div className="date-input">
+      <input
+        id="startDate"
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        required
+      />
+    </div>
+
+    <div className="date-arrow"></div>
+
+    <div className="date-input">
+      <input
+        id="endDate"
+        type="date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+        required
+      />
+    </div>
+  </div>
+  <div className="button-container">
+    <button type="button" className="cancel-button" onClick={handleCancel}>
+      Cancel
+    </button>
+    <button type="submit" className="submit-button">
+      Submit
+    </button>
+  </div>
+</form>
+</div>
+
     </div>
   );
 }
